@@ -870,7 +870,57 @@
 				</section>
 
 				<section>
-					<h2>05. الاختبار الميداني</h2>
+					<h2>05. أسئلة ميدانية</h2>
+					<div class="form-grid">
+						<div class="form-group full-width">
+							<div class="interview-row">
+								<label>س: متى يحق لك استخدام السلاح الناري؟ (0.5 درجة)</label>
+								<input type="checkbox" class="custom-checkbox score-half" id="scoreFieldQ1">
+							</div>
+						</div>
+
+						<div class="form-group full-width">
+							<div class="interview-row">
+								<label>س: ما السرعة القصوى في الصدم الاحترافي؟ (0.5 درجة)</label>
+								<input type="checkbox" class="custom-checkbox score-half" id="scoreFieldQ2">
+							</div>
+						</div>
+
+						<div class="form-group full-width">
+							<div class="interview-row">
+								<label>س: متى يتم استخدام التيزر؟ (0.5 درجة)</label>
+								<input type="checkbox" class="custom-checkbox score-half" id="scoreFieldQ3">
+							</div>
+						</div>
+
+						<div class="form-group full-width">
+							<div class="interview-row">
+								<label>س: متى يتم استخدام النطح؟ (0.5 درجة)</label>
+								<input type="checkbox" class="custom-checkbox score-half" id="scoreFieldQ4">
+							</div>
+						</div>
+
+						<div class="form-group full-width">
+							<div class="interview-row">
+								<label>س: متى يحق لك اعتقال المجرم؟ (0.5 درجة)</label>
+								<input type="checkbox" class="custom-checkbox score-half" id="scoreFieldQ5">
+							</div>
+						</div>
+
+						<div class="form-group full-width">
+							<div class="interview-row">
+								<label>س: في حال وصلك اشعار سرقة بقالة ووجهك الدسباتش وش تسوي؟ (0.5 درجة)</label>
+								<input type="checkbox" class="custom-checkbox score-half" id="scoreFieldQ6">
+							</div>
+							<div class="video-review-notice" style="color: var(--accent-red); background-color: rgba(239, 68, 68, 0.03); border: 1px dashed rgba(239, 68, 68, 0.2);">
+								<i class="fa-solid fa-circle-exclamation"></i> ملاحظة عسكرية: يجب على المجند ذكر "مثال" لعدد الأشخاص ومركباتهم أثناء الإجابة.
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<section>
+					<h2>06. الاختبار الميداني</h2>
 					<div class="form-grid">
 						<div class="form-group full-width">
 							<div class="interview-row">
@@ -894,7 +944,7 @@
 				</section>
 
 				<section>
-					<h2>06. قرار المدرب النهائي والاعتماد</h2>
+					<h2>07. قرار المدرب النهائي والاعتماد</h2>
 					<div class="score-box">
 						<p>الدرجة المستحقة الإجمالية للمجند (المطلوب للقبول: 30 أو أكثر):</p>
 						<div class="score-value" id="liveScore">0</div>
@@ -1093,6 +1143,14 @@
 				const trainerName = document.getElementById('trainerName').value;
 				const totalScore = calculateTotalScore();
 
+				// جمع معلومات الأسئلة الميدانية الجديدة
+				const qField1 = document.getElementById('scoreFieldQ1').checked ? "✅" : "❌";
+				const qField2 = document.getElementById('scoreFieldQ2').checked ? "✅" : "❌";
+				const qField3 = document.getElementById('scoreFieldQ3').checked ? "✅" : "❌";
+				const qField4 = document.getElementById('scoreFieldQ4').checked ? "✅" : "❌";
+				const qField5 = document.getElementById('scoreFieldQ5').checked ? "✅" : "❌";
+				const qField6 = document.getElementById('scoreFieldQ6').checked ? "✅" : "❌";
+
 				const discordPayload = {
 				embeds: [{
 				title: "📋 تقرير تقييم عسكري جديد",
@@ -1105,6 +1163,7 @@
 				{ name: "📊 الدرجة الإجمالية:", value: `**${totalScore} / 25**`, inline: false },
 				{ name: "⚖️ القرار النهائي:", value: finalDecision, inline: false },
 				{ name: "🛡️ المدرب المسؤول:", value: trainerName, inline: false },
+				{ name: "📝 الأسئلة الميدانية", value: `استخدام السلاح: ${qField1}\nسرعة الصدم: ${qField2}\nاستخدام التيزر: ${qField3}\nاستخدام النطح: ${qField4}\nاعتقال المجرم: ${qField5}\nبلاغ البقالة (مثال): ${qField6}`, inline: false },
 				{ name: "🚓 الاختبار الميداني", value: `الاستيقاف المروري: ${document.getElementById('fieldTrafficStop').checked?"✅":"❌"}\nالاستيقاف الجنائي: ${document.getElementById('fieldFelonyStop').checked?"✅":"❌"}\nالمطاردة والصدم الاحترافي: ${document.getElementById('fieldPursuit').checked?"✅":"❌"}`, inline: false },
 				{ name: "📝 ملاحظات الميدان:", value: trainerNotes, inline: false },
 				{ name: "🎥 المقطع المرئي:", value: selectedSource === 'link' ? videoLink : "تم رفع ملف مباشر من الجهاز.", inline: false }
